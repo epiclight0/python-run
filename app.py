@@ -35,6 +35,16 @@ def hello() -> str:
     return render_template('hello.html')
 
 
+@app.route("/star-wars")
+def star() -> str:
+    # Use basic logging with custom fields
+    logger.info(logField="custom-entry", arbitraryField="custom-entry")
+
+    # https://cloud.google.com/run/docs/logging#correlate-logs
+    logger.info("Child logger with trace Id.")
+
+    return render_template('star-wars.html')
+
 def shutdown_handler(signal_int: int, frame: FrameType) -> None:
     logger.info(f"Caught Signal {signal.strsignal(signal_int)}")
 
